@@ -14,7 +14,7 @@ RUN		openrc; touch /run/openrc/softlevel; \
 		rc-service mariadb setup; rc-service mariadb start; \
 		mariadb < /root/mariadb_script.sql; \
 		wp-cli config create --dbname=wp_database --dbuser=admin --dbpass=admin; \
-		wp-cli core install --url=localhost --title="ft_wordpress" \
+		wp-cli core install --url=192.168.49.2:5050 --title="ft_wordpress" \
 		--admin_user=admin --admin_password=admin --admin_email=admin@gmail.com --skip-email; \
 		rm /etc/nginx/http.d/default.conf; mv ~/wordpress.conf /etc/nginx/http.d; \
 		wp-cli user create editor editor@gmail.com --role=editor --user_pass=editor; \
@@ -25,5 +25,5 @@ RUN		openrc; touch /run/openrc/softlevel; \
 
 EXPOSE	80
 
-ENTRYPOINT	["/root/start_services.sh"]
+ENTRYPOINT	["/root/start_wordpress.sh"]
 CMD			["/root/nginx_daemon_off.sh"]
