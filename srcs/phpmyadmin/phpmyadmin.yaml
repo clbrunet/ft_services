@@ -1,42 +1,42 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: phpmyadmin
   annotations:
     metallb.universe.tf/address-pool: default
     metallb.universe.tf/allow-shared-ip: shared
   labels:
-    app: nginx
+    app: phpmyadmin
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Cluster
   selector:
-    app: nginx
+    app: phpmyadmin
   ports:
-    - name: nginx-http
+    - name: phpmyadmin-http
       protocol: TCP
-      port: 80
+      port: 5000
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: phpmyadmin
   labels:
-    app: nginx
+    app: phpmyadmin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: phpmyadmin
   template:
     metadata:
       labels:
-        app: nginx
+        app: phpmyadmin
     spec:
       containers:
-        - name: nginx
+        - name: phpmyadmin
           imagePullPolicy: Never
-          image: clbrunet/nginx
+          image: clbrunet/phpmyadmin
           ports:
-            - name: nginx-http
-              containerPort: 80
+            - name: phpmyadmin-http
+              containerPort: 5000

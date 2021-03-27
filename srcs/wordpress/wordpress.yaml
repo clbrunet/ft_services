@@ -13,10 +13,9 @@ spec:
   selector:
     app: wordpress
   ports:
-    - port: 5050
-      name: wordpress-http
+    - name: wordpress-http
       protocol: TCP
-      targetPort: 5050
+      port: 5050
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,4 +38,5 @@ spec:
           imagePullPolicy: Never
           image: clbrunet/wordpress
           ports:
-            - containerPort: 5050
+            - name: wordpress-http
+              containerPort: 5050

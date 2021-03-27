@@ -12,5 +12,5 @@ RUN		rm /etc/nginx/http.d/default.conf; mv ./nginx.conf /etc/nginx/http.d/; \
 
 EXPOSE	80 443
 
-ENTRYPOINT	["/root/start_nginx.sh"]
-CMD			["/root/nginx_daemon_off.sh"]
+ENTRYPOINT	["./start_nginx.sh"]
+CMD			["./nginx_daemon_off.sh"]

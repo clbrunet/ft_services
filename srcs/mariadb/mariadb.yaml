@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: mariadb
+  ports:
+    - name: mariadb-port
+      protocol: TCP
+      port: 3306
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pvc
+  labels:
+    app: mariadb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - name: mariadb-container
+          image: clbrunet/mariadb
+          imagePullPolicy: Never
+          ports:
+            - name: mariadb-port
+              containerPort: 3306
+          volumeMounts:
+            - name: mariadb-persistent-storage
+              mountPath: "/var/lib/mysql"
+      volumes:
+        - name: mariadb-persistent-storage
+          persistentVolumeClaim:
+           claimName: mariadb-pvc
