@@ -1,7 +1,15 @@
 #!/bin/bash
 
+if [ $(nproc) -lt 2 ]; then
+	echo "You need at least 2 CPUs"
+	exit
+fi
+if ! groups | grep "docker" > /dev/null; then
+	sudo usermod -aG docker $(whoami) && newgrp docker
+fi
+
 minikube delete
-minikube start
+minikube start --driver=docker
 minikube addons enable metrics-server
 minikube addons enable dashboard
 eval $(minikube -p minikube docker-env)
