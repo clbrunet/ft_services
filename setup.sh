@@ -5,7 +5,9 @@ if [ $(nproc) -lt 2 ]; then
 	exit
 fi
 if ! groups | grep "docker" > /dev/null; then
+	echo "Add docker group to the user. Restart the script"
 	sudo usermod -aG docker $(whoami) && newgrp docker
+	exit
 fi
 
 minikube delete
