@@ -16,6 +16,9 @@ spec:
     - name: nginx-http
       protocol: TCP
       port: 80
+    - name: nginx-https
+      protocol: TCP
+      port: 443
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,3 +43,5 @@ spec:
           ports:
             - name: nginx-http
               containerPort: 80
+            - name: nginx-https
+              containerPort: 443

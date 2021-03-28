@@ -3,7 +3,9 @@ FROM	alpine
 WORKDIR	/usr/share/webapps/phpmyadmin/
 
 RUN		apk add --no-cache nginx php7-fpm phpmyadmin openrc; \
-		openrc; touch /run/openrc/softlevel; sed --in-place "s/localhost/mariadb/" /etc/phpmyadmin/config.inc.php
+		openrc; touch /run/openrc/softlevel; \
+		sed --in-place "s/localhost/mariadb/" /etc/phpmyadmin/config.inc.php; \
+		echo "\$cfg['PmaAbsoluteUri'] = './';" >> /etc/phpmyadmin/config.inc.php;
 
 COPY	./srcs/ /root/
 

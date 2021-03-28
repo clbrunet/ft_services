@@ -8,6 +8,9 @@ RUN		apk add --no-cache nginx openssl openrc; \
 COPY	./srcs/ ./
 
 RUN		rm /etc/nginx/http.d/default.conf; mv ./nginx.conf /etc/nginx/http.d/; \
+		openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+		-keyout /etc/ssl/private/localhost.key -out /etc/ssl/certs/localhost.crt \
+		-subj '/CN=localhost';  \
 		mkdir -p /var/www/html/; mv ./index.html /var/www/html/;
 
 EXPOSE	80 443
