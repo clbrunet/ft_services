@@ -19,8 +19,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manife
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f ./srcs/metallb/metallb_config.yaml
 
-docker build -t clbrunet/mariadb ./srcs/mariadb/
-kubectl apply -f ./srcs/mariadb/mariadb.yaml
+docker build -t clbrunet/mysql ./srcs/mysql/
+kubectl apply -f ./srcs/mysql/mysql.yaml
 
 docker build -t clbrunet/nginx ./srcs/nginx/
 kubectl apply -f ./srcs/nginx/nginx.yaml
@@ -30,7 +30,7 @@ kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
 
 docker build -t clbrunet/wordpress ./srcs/wordpress/
 while [[ $(kubectl get pods -n metallb-system -l app=metallb -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True"
-	|| $(kubectl get pods -l app=mariadb -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+	|| $(kubectl get pods -l app=mysql -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
 	sleep 0.5;
 done
 kubectl apply -f ./srcs/wordpress/wordpress.yaml

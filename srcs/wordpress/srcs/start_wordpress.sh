@@ -16,7 +16,7 @@ else
 	echo -e "\r\033[1A\033[Knginx start [failed]"
 fi
 
-wp-cli config create --dbname=wp_database --dbhost=mariadb --dbuser=admin --dbpass=admin;
+wp-cli config create --dbname=wp_database --dbhost=mysql --dbuser=admin --dbpass=admin;
 wp-cli core install --url=192.168.49.2:5050 --title="ft_wordpress" --admin_user=admin \
 	--admin_password=admin --admin_email=admin@gmail.com --skip-email;
 wp-cli user create editor editor@gmail.com --role=editor --user_pass=editor;

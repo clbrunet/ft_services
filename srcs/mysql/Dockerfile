@@ -8,5 +8,5 @@ COPY	./srcs/ ./
 
 EXPOSE	3306
 
-ENTRYPOINT	["./start_mariadb.sh"]
+ENTRYPOINT	["./start_mysql.sh"]
 CMD			["./mariadbd.sh"]
