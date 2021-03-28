@@ -5,9 +5,10 @@ if [ $(nproc) -lt 2 ]; then
 	exit
 fi
 if ! groups | grep "docker" > /dev/null; then
-	echo "Adding docker group to the user"
+	echo "Adding docker group to $(whoami)."
 	sudo usermod -aG docker $(whoami)
-	echo "Please restart the script"
+	echo "The docker group has been added to $(whoami)."
+	echo "Please restart the script."
 	newgrp docker
 	exit
 fi
