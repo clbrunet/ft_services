@@ -12,6 +12,9 @@ if ! groups | grep "docker" > /dev/null; then
 	newgrp docker
 	exit
 fi
+if [ -f /etc/init.d/nginx ] && systemctl is-active --quiet nginx.service; then
+	/etc/init.d/nginx stop
+fi
 
 minikube delete
 minikube start --driver=docker
