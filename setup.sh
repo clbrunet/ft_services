@@ -29,9 +29,12 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | \
 	sed -e "s/strictARP: false/strictARP: true/" | \
 	kubectl apply -f - -n kube-system
 
-sed --in-place "s/\(- \)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1${ip}/" ./srcs/metallb/metallb_config.yaml
-sed --in-place "s/\(https\?:\/\/\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1${ip}/g" ./srcs/nginx/srcs/index.html
-sed --in-place "s/\(--url=\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}\(:5050\)/\1${ip}\3/" ./srcs/wordpress/srcs/start_wordpress.sh
+ip_regex="\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}"
+sed --in-place "s/${ip_regex}/${ip}/" ./srcs/metallb/metallb_config.yaml
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/Dockerfile
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/nginx.conf
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/index.html
+sed --in-place "s/${ip_regex}/${ip}/" ./srcs/wordpress/srcs/start_wordpress.sh
 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
