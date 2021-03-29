@@ -44,15 +44,15 @@ kubectl apply -f ./srcs/metallb/metallb_config.yaml
 docker build -t clbrunet/mysql ./srcs/mysql/
 kubectl apply -f ./srcs/mysql/mysql.yaml
 
-docker build -t clbrunet/nginx ./srcs/nginx/
-kubectl apply -f ./srcs/nginx/nginx.yaml
-
 docker build -t clbrunet/phpmyadmin ./srcs/phpmyadmin/
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
+
+docker build -t clbrunet/nginx ./srcs/nginx/
+kubectl apply -f ./srcs/nginx/nginx.yaml
 
 docker build -t clbrunet/wordpress ./srcs/wordpress/
 while [[ $(kubectl get pods -n metallb-system -l app=metallb -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True"
 	|| $(kubectl get pods -l app=mysql -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-	sleep 0.5;
+	sleep 0.2;
 done
 kubectl apply -f ./srcs/wordpress/wordpress.yaml
