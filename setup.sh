@@ -23,9 +23,10 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | \
 	sed -e "s/strictARP: false/strictARP: true/" | \
 	kubectl apply -f - -n kube-system
 
-sed --in-place "s/\(- \)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1$(minikube ip)/" ./srcs/metallb/metallb_config.yaml
-sed --in-place "s/\(http:\/\/\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1$(minikube ip)/g" ./srcs/nginx/srcs/index.html
-sed --in-place "s/\(--url=\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}\(:5050\)/\1$(minikube ip)\3/" ./srcs/wordpress/srcs/start_wordpress.sh
+ip=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minikube)
+sed --in-place "s/\(- \)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1${ip}/" ./srcs/metallb/metallb_config.yaml
+sed --in-place "s/\(https\?:\/\/\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}/\1${ip}/g" ./srcs/nginx/srcs/index.html
+sed --in-place "s/\(--url=\)\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}\(:5050\)/\1${ip}\3/" ./srcs/wordpress/srcs/start_wordpress.sh
 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
