@@ -8,4 +8,6 @@ else
 	echo -e "\r\033[1A\033[Knginx start [failed]"
 fi
 
+telegraf --config /root/telegraf.conf &> /root/telegraf.out &
+
 exec "$@"

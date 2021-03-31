@@ -2,7 +2,7 @@ FROM	alpine
 
 WORKDIR	/root/
 
-RUN		apk add --no-cache openrc influxdb; \
+RUN		apk add --no-cache openrc influxdb telegraf; \
 		openrc; touch /run/openrc/softlevel;
 
 COPY	./srcs/ ./
