@@ -44,8 +44,14 @@ kubectl apply -f ./srcs/metallb/metallb_config.yaml
 docker build -t clbrunet/mysql ./srcs/mysql/
 kubectl apply -f ./srcs/mysql/mysql.yaml
 
+docker build -t clbrunet/influxdb ./srcs/influxdb/
+kubectl apply -f ./srcs/influxdb/influxdb.yaml
+
 docker build -t clbrunet/phpmyadmin ./srcs/phpmyadmin/
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
+
+docker build -t clbrunet/grafana ./srcs/grafana/
+kubectl apply -f ./srcs/grafana/grafana.yaml
 
 docker build -t clbrunet/nginx ./srcs/nginx/
 kubectl apply -f ./srcs/nginx/nginx.yaml

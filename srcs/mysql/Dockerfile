@@ -2,7 +2,8 @@ FROM	alpine
 
 WORKDIR	/root/
 
-RUN		apk add --no-cache openrc mariadb mariadb-client;
+RUN		apk add --no-cache openrc mariadb mariadb-client; \
+		openrc; touch /run/openrc/softlevel;
 
 COPY	./srcs/ ./
 

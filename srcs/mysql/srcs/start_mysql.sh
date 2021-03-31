@@ -1,7 +1,5 @@
 #!/bin/sh
 
-openrc
-touch /run/openrc/softlevel
 rc-service mariadb setup
 rc-service mariadb start
 mariadb < ./mysql_script.sql
