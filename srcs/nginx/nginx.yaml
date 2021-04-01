@@ -37,7 +37,7 @@ spec:
         app: nginx
     spec:
       containers:
-        - name: nginx
+        - name: nginx-container
           imagePullPolicy: Never
           image: clbrunet/nginx
           ports:

@@ -2,7 +2,7 @@ FROM	alpine
 
 WORKDIR	/usr/share/webapps/phpmyadmin/
 
-RUN		apk add --no-cache nginx php7-fpm phpmyadmin openrc telegraf; \
+RUN		apk add --no-cache nginx php7-fpm phpmyadmin openrc; \
 		openrc; touch /run/openrc/softlevel; \
 		sed --in-place "s/localhost/mysql/" /etc/phpmyadmin/config.inc.php; \
 		echo "\$cfg['PmaAbsoluteUri'] = './';" >> /etc/phpmyadmin/config.inc.php;

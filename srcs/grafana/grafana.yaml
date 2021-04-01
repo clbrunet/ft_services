@@ -34,7 +34,7 @@ spec:
         app: grafana
     spec:
       containers:
-        - name: grafana
+        - name: grafana-container
           imagePullPolicy: Never
           image: clbrunet/grafana
           ports:

@@ -34,7 +34,7 @@ spec:
         app: phpmyadmin
     spec:
       containers:
-        - name: phpmyadmin
+        - name: phpmyadmin-container
           imagePullPolicy: Never
           image: clbrunet/phpmyadmin
           ports:

@@ -7,9 +7,6 @@ datasources:
     url: http://influxdb:8086
     user: admin
     database: ft_services
-    # <bool> enable/disable basic auth
-    # basicAuth: false
-    # <bool> mark as default datasource. Max one per org
     isDefault: true
     secureJsonData:
       password: admin

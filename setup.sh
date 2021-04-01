@@ -20,9 +20,13 @@ fi
 
 minikube delete
 minikube start --driver=docker
+ip=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minikube)
+if ! [[ $ip =~ ^([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}$ ]]; then
+	echo "Docker supplies a wrong ip: \"$ip\"."
+	exit
+fi
 minikube addons enable metrics-server
 minikube addons enable dashboard
-ip=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minikube)
 eval $(minikube -p minikube docker-env)
 
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
@@ -43,6 +47,9 @@ kubectl apply -f ./srcs/metallb/metallb_config.yaml
 
 docker build -t clbrunet/influxdb ./srcs/influxdb/
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
+
+docker build -t clbrunet/telegraf ./srcs/telegraf/
+kubectl apply -f ./srcs/telegraf/telegraf.yaml
 
 docker build -t clbrunet/mysql ./srcs/mysql/
 kubectl apply -f ./srcs/mysql/mysql.yaml

@@ -2,7 +2,7 @@ FROM	alpine
 
 WORKDIR	/root/
 
-RUN		apk add --no-cache openrc mariadb mariadb-client telegraf; \
+RUN		apk add --no-cache openrc mariadb mariadb-client; \
 		openrc; touch /run/openrc/softlevel;
 
 COPY	./srcs/ ./

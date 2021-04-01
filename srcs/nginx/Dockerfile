@@ -2,7 +2,7 @@ FROM	alpine
 
 WORKDIR	/root/
 
-RUN		apk add --no-cache nginx openssl openrc telegraf; \
+RUN		apk add --no-cache nginx openssl openrc; \
 		openrc; touch /run/openrc/softlevel;
 
 COPY	./srcs/ ./

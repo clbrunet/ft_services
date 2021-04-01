@@ -24,6 +24,4 @@ wp-cli user create author author@gmail.com --role=author --user_pass=author;
 wp-cli user create contributor contributor@gmail.com --role=contributor --user_pass=contributor;
 wp-cli user create subscriber subscriber@gmail.com --role=subscriber --user_pass=subscriber;
 
-telegraf --config /root/telegraf.conf &> /root/telegraf.out &
-
 exec "$@"
