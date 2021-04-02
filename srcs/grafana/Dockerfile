@@ -8,7 +8,8 @@ RUN		apk add --no-cache libc6-compat; \
 
 COPY	./srcs/ ./
 
-RUN		mv ./influxdb_datasource.yaml ./grafana-7.5.1/conf/provisioning/datasources/;
+RUN		mv ./influxdb_datasource.yaml ./grafana-7.5.1/conf/provisioning/datasources/; \
+		mv ./dashboard.yaml ./grafana-7.5.1/conf/provisioning/dashboards/;
 
 EXPOSE	3000
 
