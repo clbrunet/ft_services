@@ -14,5 +14,5 @@ RUN		rm /etc/nginx/http.d/default.conf; mv ~/wordpress.conf /etc/nginx/http.d;
 
 EXPOSE	5050
 
-ENTRYPOINT	["/root/start_wordpress.sh"]
-CMD			["/root/nginx_daemon_off.sh"]
+ENTRYPOINT	["/root/entrypoint.sh"]
+CMD			["nginx", "-g", "daemon off;"]

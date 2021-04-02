@@ -13,4 +13,4 @@ RUN		mv ./influxdb_datasource.yaml ./grafana-7.5.1/conf/provisioning/datasources
 
 EXPOSE	3000
 
-CMD		["./start_grafana.sh"]
+CMD		["./grafana-7.5.1/bin/grafana-server", "-homepath", "./grafana-7.5.1/"]

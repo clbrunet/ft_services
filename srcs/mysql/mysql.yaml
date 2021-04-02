@@ -52,6 +52,15 @@ spec:
           ports:
             - name: mysql-port
               containerPort: 3306
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - /root/liveness_probe.sh
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 1
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: "/var/lib/mysql"

@@ -38,7 +38,7 @@ sed --in-place "s/${ip_regex}/${ip}/" ./srcs/metallb/metallb_config.yaml
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/Dockerfile
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/nginx.conf
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/index.html
-sed --in-place "s/${ip_regex}/${ip}/" ./srcs/wordpress/srcs/start_wordpress.sh
+sed --in-place "s/${ip_regex}/${ip}/" ./srcs/wordpress/srcs/entrypoint.sh
 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml

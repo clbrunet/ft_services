@@ -8,13 +8,8 @@ else
 	echo -e "\r\033[1A\033[Kphp-fpm start [failed]"
 fi
 
-echo -e "nginx start [ongoing]"
-rc-service nginx restart &> /dev/null;
-if [ $? -eq 0 ]; then
-	echo -e "\r\033[1A\033[Knginx start [done]"
-else
-	echo -e "\r\033[1A\033[Knginx start [failed]"
-fi
+rc-service nginx start &> /dev/null;
+rc-service nginx stop &> /dev/null;
 
 wp-cli config create --dbname=wp_database --dbhost=mysql --dbuser=admin --dbpass=admin;
 wp-cli core install --url=192.168.49.2:5050 --title="ft_wordpress" --admin_user=admin \

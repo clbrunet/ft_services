@@ -13,5 +13,5 @@ RUN		rm /etc/nginx/http.d/default.conf; mv ~/phpmyadmin.conf /etc/nginx/http.d;
 
 EXPOSE	5000
 
-ENTRYPOINT	["/root/start_phpmyadmin.sh"]
-CMD			["/root/nginx_daemon_off.sh"]
+ENTRYPOINT	["/root/entrypoint.sh"]
+CMD			["nginx", "-g", "daemon off;"]
