@@ -14,7 +14,29 @@ spec:
     app: ftps
   ports:
     - name: ftps-port
-      containerPort: 21
+      port: 21
+    - name: actv-port
+      port: 20
+    - name: pasv-port0
+      port: 21000
+    - name: pasv-port1
+      port: 21001
+    - name: pasv-port2
+      port: 21002
+    - name: pasv-port3
+      port: 21003
+    - name: pasv-port4
+      port: 21004
+    - name: pasv-port5
+      port: 21005
+    - name: pasv-port6
+      port: 21006
+    - name: pasv-port7
+      port: 21007
+    - name: pasv-port8
+      port: 21008
+    - name: pasv-port9
+      port: 21009
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,3 +61,25 @@ spec:
           ports:
             - name: ftps-port
               containerPort: 21
+            - name: actv-port
+              containerPort: 20
+            - name: pasv-port0
+              containerPort: 21000
+            - name: pasv-port1
+              containerPort: 21001
+            - name: pasv-port2
+              containerPort: 21002
+            - name: pasv-port3
+              containerPort: 21003
+            - name: pasv-port4
+              containerPort: 21004
+            - name: pasv-port5
+              containerPort: 21005
+            - name: pasv-port6
+              containerPort: 21006
+            - name: pasv-port7
+              containerPort: 21007
+            - name: pasv-port8
+              containerPort: 21008
+            - name: pasv-port9
+              containerPort: 21009
