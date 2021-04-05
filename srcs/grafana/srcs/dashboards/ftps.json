@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 8,
+  "id": 7,
   "links": [],
   "panels": [
     {
@@ -105,7 +105,7 @@
             {
               "key": "container_name",
               "operator": "=~",
-              "value": "/.*phpmyadmin-container.*/"
+              "value": "/.*ftps-container.*/"
             }
           ]
         }
@@ -239,7 +239,7 @@
             {
               "key": "container_name",
               "operator": "=~",
-              "value": "/.*phpmyadmin-container.*/"
+              "value": "/.*ftps-container.*/"
             }
           ]
         }
@@ -299,7 +299,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "phpmyadmin",
-  "uid": "8l1mnKlGz",
+  "title": "ftps",
+  "uid": "F1pvD1_Gk",
   "version": 1
 }
