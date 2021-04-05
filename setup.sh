@@ -74,3 +74,5 @@ while [[ $(kubectl get pods -n metallb-system -l app=metallb -o 'jsonpath={..sta
 	sleep 0.2;
 done
 kubectl apply -f ./srcs/wordpress/wordpress.yaml
+
+minikube dashboard
