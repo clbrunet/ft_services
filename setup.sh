@@ -4,14 +4,8 @@ if [ $(nproc) -lt 2 ]; then
 	echo "You need at least 2 CPUs"
 	exit
 fi
-if ! groups | grep "docker" > /dev/null; then
-	echo "Adding docker group to $(whoami)."
-	sudo usermod -aG docker $(whoami)
-	echo "The docker group has been added to $(whoami)."
-	echo "Please restart the script."
-	newgrp docker
-	exit
-fi
+echo "Setup docker permissions."
+sudo chmod 777 /var/run/docker.sock
 if systemctl is-active --quiet nginx.service; then
 	echo "Stopping local nginx."
 	sudo /etc/init.d/nginx stop > /dev/null
