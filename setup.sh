@@ -4,12 +4,14 @@ if [ $(nproc) -lt 2 ]; then
 	echo "You need at least 2 CPUs"
 	exit
 fi
-echo "Setup docker permissions."
-sudo chmod 777 /var/run/docker.sock
+if [ ! -r /var/run/docker.sock ] || [ ! -w /var/run/docker.sock ] || [ ! -x /var/run/docker.sock ]; then
+	echo "Setup docker permissions."
+	sudo chmod 777 /var/run/docker.sock
+fi
+exit
 if systemctl is-active --quiet nginx.service; then
 	echo "Stopping local nginx."
 	sudo /etc/init.d/nginx stop > /dev/null
-	echo "Local nginx stopped."
 fi
 
 minikube delete
