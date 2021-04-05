@@ -11,6 +11,9 @@ fi
 rc-service nginx start &> /dev/null;
 rc-service nginx stop &> /dev/null;
 
+while ! mariadb --host=mysql --user=admin --password=admin < /dev/null > /dev/null; do
+	sleep 0.2;
+done
 wp-cli config create --dbname=wp_database --dbhost=mysql --dbuser=admin --dbpass=admin;
 wp-cli core install --url=192.168.49.2:5050 --title="ft_wordpress" --admin_user=admin \
 	--admin_password=admin --admin_email=admin@gmail.com --skip-email;
