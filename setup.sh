@@ -37,12 +37,13 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f ./srcs/metallb/metallb_config.yaml
 
 ip_regex="\([[:digit:]]\{1,3\}\.\)\{3\}[[:digit:]]\{1,3\}"
-sed --in-place "s/${ip_regex}/${ip}/" ./srcs/metallb/metallb_config.yaml
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/metallb/metallb_config.yaml
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/Dockerfile
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/nginx.conf
 sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/nginx/srcs/index.html
-sed --in-place "s/${ip_regex}/${ip}/" ./srcs/wordpress/srcs/entrypoint.sh
-sed --in-place "s/${ip_regex}/${ip}/" ./srcs/ftps/srcs/vsftpd.conf
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/ftps/Dockerfile
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/ftps/srcs/vsftpd.conf
+sed --in-place "s/${ip_regex}/${ip}/g" ./srcs/wordpress/srcs/entrypoint.sh
 
 eval $(minikube -p minikube docker-env)
 
