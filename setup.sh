@@ -8,7 +8,6 @@ if [ ! -r /var/run/docker.sock ] || [ ! -w /var/run/docker.sock ] || [ ! -x /var
 	echo "Setup docker permissions."
 	sudo chmod 777 /var/run/docker.sock
 fi
-exit
 if systemctl is-active --quiet nginx.service; then
 	echo "Stopping local nginx."
 	sudo /etc/init.d/nginx stop > /dev/null
